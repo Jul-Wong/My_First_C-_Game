@@ -136,6 +136,7 @@ input.buttons[b].is_down = is_down;\
         // Simulate
         simulate_game(&input, delta_time);
 
+        
 
 
 

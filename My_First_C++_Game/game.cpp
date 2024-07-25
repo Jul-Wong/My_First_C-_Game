@@ -6,7 +6,7 @@
 float player_px, player_dpx, player_py, player_dpy;
 float grass_box_x = 80, grass_box_y = 40;
 float player_half_size_x = 5, player_half_size_y = 5;
-float ball_px, ball_py, ball_dpx = 100, ball_dpy = 10, ball_half_size = 2;
+float ball_px, ball_py, ball_dpx = 150, ball_dpy = 30, ball_half_size = 2;
 
 
 internal void simulate_game(Input* input, float dt) {
@@ -33,6 +33,16 @@ internal void simulate_game(Input* input, float dt) {
     player_px = player_px + player_dpx * dt + player_ddpx * dt * dt * .5f;
     player_dpx = player_dpx + player_ddpx * dt;
 
+    
+    // Player-Ball Collision Detection
+
+    if (ball_px + ball_half_size > player_px - player_half_size_x &&
+        ball_px - ball_half_size < player_px + player_half_size_x &&
+        ball_py + ball_half_size > player_py - player_half_size_y &&
+        ball_py - ball_half_size < player_py + player_half_size_y) {
+
+        draw_rect(0, 0, 30, 30, 0xffffff);
+    }
     
     // Player Collision Detection
 
