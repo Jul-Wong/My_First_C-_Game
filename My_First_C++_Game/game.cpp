@@ -33,6 +33,10 @@ internal void simulate_game(Input* input, float dt) {
     player_px = player_px + player_dpx * dt + player_ddpx * dt * dt * .5f;
     player_dpx = player_dpx + player_ddpx * dt;
 
+    
+    // Player Collision Detection
+
+
     if (player_py + player_half_size_y > grass_box_y) {
         player_py = grass_box_y - player_half_size_y;
     }
@@ -52,25 +56,32 @@ internal void simulate_game(Input* input, float dt) {
 
     draw_rect(ball_px, ball_py, ball_half_size, ball_half_size, 0xff0000);
 
+    //Collision Detection for the ball (small rectangle)
+
     if (ball_px + ball_half_size > grass_box_x) {
+
         ball_px = grass_box_x - ball_half_size;
+        ball_dpx += (grass_box_x / 30 - ball_half_size);
         ball_dpx *= -1;
     }
     else if (ball_px - ball_half_size < -grass_box_x) {
         ball_px = -grass_box_x + ball_half_size;
+        ball_dpx += (-grass_box_x / 30 + ball_half_size);
         ball_dpx *= -1;
     }
 
     if (ball_py + ball_half_size > grass_box_y) {
+
         ball_py = grass_box_y - ball_half_size;
+        ball_dpy += (grass_box_y / 30 - ball_half_size);
         ball_dpy *= -1;
     }
     else if (ball_py - ball_half_size < -grass_box_y) {
         ball_py = -grass_box_y + ball_half_size;
+        ball_dpy += (-grass_box_y / 30 + ball_half_size);
         ball_dpy *= -1;
     }
-
-
+    
 
 
     draw_rect(player_px, player_py, player_half_size_x, player_half_size_y, 0x00f0f0);
